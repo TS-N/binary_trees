@@ -5,7 +5,7 @@
   * @tree: is a pointer to the root node of the tree to traverse
   * @func: is a pointer to a function to call for
   *
-  * Return: 1 if node is a leaf, otherwise 0
+  * Return: void
   **/
 
 void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int))
