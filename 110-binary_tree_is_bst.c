@@ -3,22 +3,25 @@
 /**
  * inorder - goes through a binary tree using in-order traversal
  * @tree: is a pointer to the root node of the tree to traverse
- * @prev: the previous data in the traversal
+ * @prev: the address of the previous node in the traversal
  * @flick: bool value for if tree is a BST
  *
  * Return: void
  **/
 
-void	inorder(const binary_tree_t *tree, int *prev, int *flick)
+void	inorder(const binary_tree_t *tree, const binary_tree_t **prev, int *flick)
 {
 	if (!tree || !*flick)
 	{
 		return;
 	}
 	inorder(tree->left, prev, flick);
-	if (tree->n < *prev)
-		*flick = 0;
-	*prev = tree->n;
+	if (*prev)
+	{
+		if (tree->n <= (*prev)->n)
+			*flick = 0;
+	}
+	*prev = tree;
 	inorder(tree->right, prev, flick);
 }
 
@@ -30,7 +33,9 @@ void	inorder(const binary_tree_t *tree, int *prev, int *flick)
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
 	int	a = 1;
-	int	prev = INT_MIN;
+	const binary_tree_t	*prev;
+
+	prev = NULL;
 
 	if (!tree)
 		return (0);
