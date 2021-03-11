@@ -1,7 +1,7 @@
 #include "binary_trees.h"
 
 /**
-  * preorder - traverse recursively the tree starting \
+  * rev_preorder - traverse recursively the tree starting \
   from the right most element and stores the highest dept encountered \
   if a NULL element is found higher then the tree is not complete
   * @tree: is a pointer to the root node of the tree to check
@@ -9,7 +9,7 @@
   * @cur_y: the current depth
   * Return: 1 if complete, 0 therwise
   **/
-int	preorder(const binary_tree_t *tree, int *max_y, int cur_y)
+int	rev_preorder(const binary_tree_t *tree, int *max_y, int cur_y)
 {
 	if (!tree)
 	{
@@ -17,10 +17,9 @@ int	preorder(const binary_tree_t *tree, int *max_y, int cur_y)
 			return (0);
 		return (1);
 	}
-
 	*max_y = (cur_y > *max_y ? cur_y : *max_y);
-	return (preorder(tree->right, max_y, cur_y + 1) &
-			preorder(tree->left, max_y, cur_y + 1));
+	return (rev_preorder(tree->right, max_y, cur_y + 1) &
+			rev_preorder(tree->left, max_y, cur_y + 1));
 }
 
 /**
@@ -32,6 +31,6 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	int	y = 0;
 
-	return (preorder(tree, &y, 0));
+	return (rev_preorder(tree, &y, 0));
 
 }
