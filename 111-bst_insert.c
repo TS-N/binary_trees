@@ -12,9 +12,9 @@ bst_t	*rec(bst_t *tree, int value)
 		return (tree);
 	if (value == tree->n)
 		return (0);
-	if (value > tree->n)
+	else if (value > tree->n)
 		return (tree->right ? rec(tree->right, value) : tree);
-	if (value < tree->n)
+	else if (value < tree->n)
 		return (tree->left ? rec(tree->left, value) : tree);
 	return (0);
 }
@@ -30,6 +30,8 @@ bst_t *bst_insert(bst_t **tree, int value)
 	bst_t	*new = NULL;
 	bst_t	*node = NULL;
 
+	if (!tree)
+		return (0);
 	if (!*tree)
 	{
 		new = binary_tree_node(NULL, value);
